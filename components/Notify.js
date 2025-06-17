@@ -5,7 +5,7 @@ import Toast from './Toast';
 // import Toast from 'react-bootstrap/Toast';
 
 export default function Notify() {
-  const [state, dispatch] = React.useContext(DataContext);
+  const { state, dispatch } = React.useContext(DataContext);
   const { notify } = state;
 
   console.log('Notify component', notify);

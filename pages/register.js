@@ -15,7 +15,7 @@ export default function Register() {
   const [password, bindPassword] = useInput('123456');
   const [cf_password, bindCF_Password] = useInput('123456');
 
-  const [state, dispatch] = React.useContext(DataContext);
+  const { state, dispatch } = React.useContext(DataContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -2,19 +2,27 @@ import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
 import useInput from '../hooks/useInput';
+import { postData } from '../utils/fetchData';
+import { DataContext } from '../store/GlobalState';
+import fieldsValidation from '../utils/validation';
+import { ACTIONS } from '../store/Actions';
 
 export default function SignIn() {
-  const [email, bindEmail] = useInput('');
-  const [password, bindPassword] = useInput('');
+  const [email, bindEmail] = useInput('user@gmail.com');
+  const [password, bindPassword] = useInput('123456');
+
+  const { state, dispatch } = React.useContext(DataContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // Here you would typically handle the login logic, such as validating the input
-    // and making an API call to authenticate the user.
-    console.log('Login attempt with:', { email, password });
+    const errorMessage = fieldsValidation({ checkType: 'signin', fields: { email, password } });
 
-    // For demonstration purposes, let's just log the values.
-    // In a real application, you would replace this with your authentication logic.
+    if (errorMessage) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: errorMessage } });
+    dispatch({ type: ACTIONS.NOTIFY, payload: { loading: true } });
+
+    const res = await postData('auth/signin', { email, password }, state.token);
+    if (res.error) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: { message: res.error } } });
+    return dispatch({ type: ACTIONS.NOTIFY, payload: { success: { message: res.success } } });
   }
 
   return (
