@@ -1,0 +1,48 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#ffdc41",
+    "activityBar.activeBorder": "#00ff3d",
+    "activityBar.background": "#ffdc41",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#009f82",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "sash.hoverBorder": "#ffdc41",
+    "statusBar.background": "#ffd30e",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#dab200",
+    "statusBarItem.remoteBackground": "#ffd30e",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#ffd30e",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#ffd30e99",
+    "titleBar.inactiveForeground": "#15202b99",
+    "commandCenter.border": "#15202b99",
+    "selection.background": "#aec2b0ba",
+    "activityBar.border": "#ec0378"
+  },
+  "peacock.color": "#ffd30e",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.detectIndentation": false
+}
+
+// {
+//   "workbench.colorCustomizations": {
+//     "activityBar.background": "#FF7043",
+//     "sideBar.background": "#112212",
+//     "editor.background": "#3E2723",
+//     "statusBar.background": "#FF7043",
+//     "titleBar.activeBackground": "#BF360C",
+//     "tab.activeBackground": "#FF7043",
+//     "tab.inactiveBackground": "#3E2723"
+//   },
+//   "editor.tokenColorCustomizations": {
+//     "comments": "#FFAB91",
+//     "keywords": "#FF7043",
+//     "strings": "#FFD180",
+//     "functions": "#FFCCBC",
+//     "variables": "#FF8A65"
+//   }
+// }
