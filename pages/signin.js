@@ -6,12 +6,21 @@ import { postData } from '../utils/fetchData';
 import { DataContext } from '../store/GlobalState';
 import fieldsValidation from '../utils/validation';
 import { ACTIONS } from '../store/Actions';
+import Cookie from 'js-cookie'
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function SignIn() {
-  const [email, bindEmail] = useInput('user@gmail.com');
+  const [email, bindEmail] = useInput('user@mail.com');
   const [password, bindPassword] = useInput('123456');
 
   const { state, dispatch } = React.useContext(DataContext);
+  const router = useRouter();
+  const { auth } = state;
+
+  useEffect(() => {
+    if (Object.keys(auth).length !== 0) router.push('/');
+  }, [auth])
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,7 +31,21 @@ export default function SignIn() {
 
     const res = await postData('auth/signin', { email, password }, state.token);
     if (res.error) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: { message: res.error } } });
-    return dispatch({ type: ACTIONS.NOTIFY, payload: { success: { message: res.success } } });
+    dispatch({ type: ACTIONS.NOTIFY, payload: { success: { message: res.success } } });
+
+    dispatch({
+      type: 'AUTH', payload: {
+        token: res.access_token,
+        user: res.user
+      }
+    })
+
+    Cookie.set('refreshtoken', res.refresh_token, {
+      path: 'api/auth/accessToken',
+      expires: 7
+    })
+
+    localStorage.setItem('firstLogin', true)
   }
 
   return (

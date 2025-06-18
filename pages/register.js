@@ -4,9 +4,10 @@ import useInput from '../hooks/useInput';
 import fieldsValidation, { SUCCESS } from '../utils/validation';
 import { DataContext } from '../store/GlobalState';
 import { ACTIONS } from '../store/Actions';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusCode } from '../utils/constants';
 import { postData } from '../utils/fetchData';
+import { useRouter } from 'next/router';
 
 export default function Register() {
 
@@ -16,6 +17,13 @@ export default function Register() {
   const [cf_password, bindCF_Password] = useInput('123456');
 
   const { state, dispatch } = React.useContext(DataContext);
+  const router = useRouter();
+  const { auth } = state;
+
+  useEffect(() => {
+    if (Object.keys(auth).length !== 0) router.push('/');
+  }, [auth])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
