@@ -34,7 +34,7 @@ export default function NavBar() {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link href="/cart" className={"nav-link" + ' ' + isActive('/cart')}>
-                <i className="fas fa-shopping-cart"></i>
+                <i className="fas fa-shopping-cart mx-2"></i>
                 Cart
               </Link>
             </li>
