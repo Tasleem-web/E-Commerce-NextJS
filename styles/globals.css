@@ -15,6 +15,13 @@ a {
   box-sizing: border-box;
 }
 
+img {
+  object-fit: fill;
+  max-width: 100%;
+  height: auto;
+}
+
 /* -------Loading---------- */
 @import url("./loading.css");
 @import url("./product.css");
+@import url("./product_details.css");
