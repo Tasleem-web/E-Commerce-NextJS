@@ -10,7 +10,7 @@ export default function NavBar() {
 
   const { state, dispatch } = React.useContext(DataContext);
 
-  const { auth } = state;
+  const { auth, cart } = state;
 
   const isActive = (path) => router.pathname === path ? 'active' : '';
 
@@ -34,7 +34,9 @@ export default function NavBar() {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link href="/cart" className={"nav-link" + ' ' + isActive('/cart')}>
-                <i className="fas fa-shopping-cart mx-2"></i>
+                <i className="fas fa-shopping-cart mx-2">
+                  <span className="badge badge-pill badge-danger">{cart.length}</span>
+                </i>
                 Cart
               </Link>
             </li>

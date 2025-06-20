@@ -21,7 +21,6 @@ export default async (req, res) => {
 const getProduct = async (req, res) => {
   try {
     const products = await Product.find();
-    console.log(products);
     return res.status(HttpStatus['OK']).json({
       status: "Products retrieved successfully!",
       result: products.length,

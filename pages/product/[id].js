@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { getData } from '../../utils/fetchData';
 
 export default function ProductDetails({ product }) {
-  console.log(product);
   const [productItem, setProductItem] = useState(product);
   const [productIndex, setProductIndex] = useState(0);
 
@@ -62,7 +61,6 @@ export default function ProductDetails({ product }) {
 export async function getServerSideProps({ params: { id } }) {
 
   const res = await getData(`product/${id}`);
-  console.log(res);
   return {
     props: {
       product: res.product,

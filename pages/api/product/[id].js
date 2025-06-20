@@ -19,7 +19,6 @@ const getProduct = async (req, res) => {
   try {
     const { id } = req.query;
     const product = await Product.findById(id);
-    console.log(product);
 
     if (!product) {
       return res.status(HttpStatus['NotFound']).json({ message: "Product not found." });

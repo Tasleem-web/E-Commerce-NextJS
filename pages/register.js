@@ -34,11 +34,8 @@ export default function Register() {
 
     const res = await postData('auth/register', { username, email, password, cf_password }, state.token);
     if (res.error) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: { message: res.error } } });
-    console.log(res);
     return dispatch({ type: ACTIONS.NOTIFY, payload: { success: { message: res.message } } });
   }
-
-
 
   return (
     <div>
