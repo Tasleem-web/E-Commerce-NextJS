@@ -1,0 +1,18 @@
+.cart_page .empty-cart,
+.empty-cart {
+  height: calc(100vh - 60px);
+}
+
+.cart_page .cart_item-tr {
+  width: 100px;
+  overflow: hidden;
+}
+
+.cart_page .cart_item-tr img {
+  min-width: 80px;
+  height: 80px;
+}
+
+/* .cart_page .cart_item-td {
+  min-width: 200px;
+} */

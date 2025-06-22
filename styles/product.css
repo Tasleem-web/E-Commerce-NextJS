@@ -13,17 +13,30 @@
   height: 250px;
   object-fit: cover;
   width: 100%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .products .title {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 100%;
+  transition: transform 0.3s;
+}
+.products .card-img-top:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+.products .card {
+  overflow: hidden;
 }
 
 .products .card-text {
   height: 70px;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 3; /* Number of lines to show */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }

@@ -2,6 +2,7 @@ import { createContext, useReducer } from "react";
 import reducers from "./Reducer";
 import { useEffect } from "react";
 import { getData } from "../utils/fetchData";
+import { ACTIONS } from "./Actions";
 
 export const DataContext = createContext();
 
@@ -19,6 +20,7 @@ export const DataProvider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(reducers, initialState);
+  const { cart } = state;
 
   useEffect(() => {
     const firstLogin = localStorage.getItem('firstLogin');
@@ -39,7 +41,14 @@ export const DataProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const __next_cart01__js = JSON.parse(localStorage.getItem('__next_cart01__js'));
+    if (__next_cart01__js) return dispatch({ type: ACTIONS.ADD_CART, payload: __next_cart01__js });
+  }, [])
 
+  useEffect(() => {
+    localStorage.setItem('__next_cart01__js', JSON.stringify(cart))
+  }, [cart])
 
   return (
     <DataContext.Provider value={{ state, dispatch }}>

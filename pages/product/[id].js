@@ -1,10 +1,15 @@
 import Head from 'next/head'
 import React, { useState } from 'react'
+import { addToCart } from '../../store/Actions';
+import { DataContext } from '../../store/GlobalState';
 import { getData } from '../../utils/fetchData';
 
 export default function ProductDetails({ product }) {
   const [productItem, setProductItem] = useState(product);
   const [productIndex, setProductIndex] = useState(0);
+
+  const { state, dispatch } = React.useContext(DataContext);
+  const { cart } = state;
 
   return (
     <div className='product_details'>
@@ -12,7 +17,7 @@ export default function ProductDetails({ product }) {
         <Head><title>Product Details Page</title></Head>
         <div className='col-md-6'>
           <img src={productItem.images[productIndex].url} alt={productItem.title}
-            className='d-block rounded img-thumbnail w-100' style={{ height: '350px' }} />
+            className='d-block rounded img-thumbnail w-100' style={{ height: '500px' }} />
 
           <div className='row mx-0 mt-2 small-img'>
             {
@@ -42,12 +47,13 @@ export default function ProductDetails({ product }) {
             <p className={`${productItem.inStock > 0 ? 'text-success' : 'text-danger'}`}>In Stock: {productItem.inStock}</p>
             <p className='text-danger'>Sold: {productItem.sold}</p>
           </div>
-          <div className='row justify-content-between'>
-            <button className='btn btn-dark mr-2' style={{ width: '48%' }}>
+          <div className='row justify-content-between mx-0'>
+            <button className='btn btn-dark mr-2' style={{ width: '48%' }} onClick={() => dispatch(addToCart(product, cart))}>
               <i className="fas fa-cart-plus mr-2"></i>
               Add to Cart
             </button>
-            <button className='btn btn-dark' style={{ width: '48%' }}>
+            <button className='btn btn-dark' style={{ width: '48%' }}
+              onClick={() => dispatch(addToCart(product, cart))}>
               <i className="fas fa-shopping-cart mr-1"></i>
               Buy
             </button>

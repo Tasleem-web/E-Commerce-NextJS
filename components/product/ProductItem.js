@@ -12,7 +12,7 @@ export default function ProductItem({ product }) {
 
   return (
     <div>
-      <div className="card" style={{ width: '18rem' }}>
+      <div className={`card${product.inStock > 0 ? ' border-success' : ' border-danger'}`} style={{ width: '18rem', borderWidth: '4px', borderStyle: 'solid' }}>
         {product.images && product.images.length > 0 ? (
           <img src={product.images[0].url} className="card-img-top" alt={product.images[0].url} />
         ) : (
@@ -38,7 +38,8 @@ export default function ProductItem({ product }) {
             <Link href={`/product/${product._id}`} className="btn btn-info flex-fill mr-1">
               <i className="fas fa-eye"></i> View
             </Link>
-            <button className="btn btn-success flex-fill ml-1" onClick={() => dispatch(addToCart(product, cart))}>
+            <button className="btn btn-success flex-fill ml-1" onClick={() => dispatch(addToCart(product, cart))}
+              disabled={product.inStock === 0 ? true : false}>
               <i className="fas fa-shopping-cart mr-1"></i>
               Buy
             </button>
