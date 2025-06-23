@@ -8,8 +8,6 @@ export default function Notify() {
   const { state, dispatch } = React.useContext(DataContext);
   const { notify } = state;
 
-  console.log('Notify component', notify);
-
   return (
     <>
       {notify && notify.loading && <Loading />}

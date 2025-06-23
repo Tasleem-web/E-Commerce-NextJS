@@ -5,21 +5,28 @@ import CartItem from '../components/CartItem';
 import Link from 'next/link';
 import { getData } from '../utils/fetchData';
 import { ACTIONS } from '../store/Actions';
+import useInput from '../hooks/useInput';
+import PaypalBtn from './paypalBtn';
 
 export default function cart() {
 
   const { state, dispatch } = React.useContext(DataContext);
   const { cart, auth } = state;
+  const [total, setTotal] = useState(0);
+  const [address, bindAddress] = useInput('Pune');
+  const [mobile, bindMobile] = useInput('9876543210');
+  const [payment, setPayment] = useState(false);
 
-  const [total, setTotal] = useState(0)
 
   useEffect(() => {
     const getTotal = () => {
-      const res = cart.reduce((prev, item) => (prev + (item.quantity * item.price)), 0);
-      console.log('res', res)
-      setTotal(res);
+      const res = cart.reduce((prev, item) => {
+        return prev + (item.price * item.quantity)
+      }, 0)
+      setTotal(res)
     }
-    getTotal();
+
+    getTotal()
   }, [cart])
 
   useEffect(() => {
@@ -30,7 +37,6 @@ export default function cart() {
       const updateCart = async () => {
         for (const item of cartLocal) {
           const res = await getData(`/product/${item._id}`)
-          console.log(res)
           const { _id, title, images, price, inStock, sold } = res.product;
           if (inStock) {
             newArr.push({
@@ -39,14 +45,17 @@ export default function cart() {
             })
           }
         }
-
         dispatch({ type: ACTIONS.ADD_CART, payload: newArr })
       }
-
       updateCart();
-
     }
   }, [])
+
+  const handlePaypal = () => {
+    if (!address || !mobile)
+      return dispatch({ type: ACTIONS.NOTIFY, payload: { error: { message: 'Please enter all fields...' } } })
+    setPayment(true)
+  }
 
   if (!cart.length) return <img className='empty-cart' src="/empty_cart.jpg" alt="Cart is empty" />
 
@@ -72,17 +81,29 @@ export default function cart() {
         <form>
           <h2>Shipping</h2>
           <label htmlFor='address'>Address</label>
-          <input id='address' name='address' type='text' className='form-control' />
+          <input id='address' name='address' type='text' className='form-control' {...bindAddress} />
 
           <label htmlFor='mobile'>Mobile</label>
-          <input id='mobile' name='mobile' type='text' className='form-control' />
+          <input id='mobile' name='mobile' type='number' className='form-control' {...bindMobile} />
         </form>
 
         <h3>Total: <span className='text-info'>${total}</span></h3>
-
-        <Link href={auth.user ? "#" : "/signin"} className='w-100 btn btn-dark'>
-          Proceed with payment
-        </Link>
+        {
+          payment
+            ?
+            <PaypalBtn
+              total={total}
+              address={address}
+              mobile={mobile}
+              state={state}
+              dispatch={dispatch}
+            />
+            :
+            <Link href={auth.user ? "#!" : "/signin"} className='w-100 btn btn-dark'
+              onClick={handlePaypal}>
+              Proceed with payment
+            </Link>
+        }
       </div>
     </div>
   )

@@ -13,7 +13,8 @@ export const DataProvider = ({ children }) => {
     nofity: { loading: false, success: false, error: false },
     auth: {},
     cart: [],
-    modal: { show: false, data: {} },
+    // modal: { show: false, data: {} },
+    modal: {},
     categories: [],
     products: [],
     orders: []

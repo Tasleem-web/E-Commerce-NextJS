@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { decrease, increase } from '../store/Actions'
+import { ACTIONS, decrease, increase } from '../store/Actions'
 
 export default function CartItem({ item, dispatch, cart }) {
   return (
@@ -27,10 +27,14 @@ export default function CartItem({ item, dispatch, cart }) {
           disabled={item.quantity === 1}
         > - </button>
         <span className='px-3'>{item.quantity}</span>
-        <button className='btn btn-outline-secondary' onClick={() => dispatch(increase(cart, item._id))}> + </button>
+        <button disabled={item.quantity === item.inStock} className='btn btn-outline-secondary' onClick={() => dispatch(increase(cart, item._id))}> + </button>
       </td>
       <td className='align-middle text-danger' style={{ cursor: 'pointer' }}>
-        <i className="fas fa-trash-alt mr-1"></i>
+        <button className='btn btn-danger'
+          data-toggle="modal" data-target="#exampleModal"
+          onClick={() => dispatch({ type: ACTIONS.ADD_MODAL, payload: { data: cart, title: item.title, id: item._id } })}>
+          <i className="fas fa-trash-alt mr-1" ></i>
+        </button>
       </td>
     </tr>
   )
