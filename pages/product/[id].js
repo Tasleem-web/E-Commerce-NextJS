@@ -16,13 +16,14 @@ export default function ProductDetails({ product }) {
       <div className='row detail_page mt-4'>
         <Head><title>Product Details Page</title></Head>
         <div className='col-md-6'>
-          <img src={productItem.images[productIndex].url} alt={productItem.title}
+          <img tabIndex="0" src={productItem.images[productIndex].url} alt={productItem.title}
             className='d-block rounded img-thumbnail w-100' style={{ height: '500px' }} />
 
           <div className='row mx-0 mt-2 small-img'>
             {
               productItem.images.map((img, index) => (
                 <img
+                  tabIndex="0"
                   key={img.url}
                   src={img.url}
                   alt={productItem.title}
@@ -48,12 +49,14 @@ export default function ProductDetails({ product }) {
             <p className='text-danger'>Sold: {productItem.sold}</p>
           </div>
           <div className='row justify-content-between mx-0'>
-            <button className='btn btn-dark mr-2' style={{ width: '48%' }} onClick={() => dispatch(addToCart(product, cart))}>
+            <button className='btn btn-dark mr-2' style={{ width: '48%' }} onClick={() => dispatch(addToCart(product, cart))}
+              disabled={product.inStock === 0}>
               <i className="fas fa-cart-plus mr-2"></i>
               Add to Cart
             </button>
             <button className='btn btn-dark' style={{ width: '48%' }}
-              onClick={() => dispatch(addToCart(product, cart))}>
+              onClick={() => dispatch(addToCart(product, cart))}
+              disabled={product.inStock === 0}>
               <i className="fas fa-shopping-cart mr-1"></i>
               Buy
             </button>

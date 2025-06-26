@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react'
+import { postData } from '../utils/fetchData';
+import { ACTIONS } from '../store/Actions';
 
 export default function PaypalBtn({ total, address, mobile, state, dispatch }) {
   const refPaypalBtn = useRef();
@@ -18,7 +20,14 @@ export default function PaypalBtn({ total, address, mobile, state, dispatch }) {
       onApprove: function (data, actions) {
         return actions.order.capture().then(function (details) {
           console.log("data", data)
-          alert("Transaction completed by " + details.payer.name.given_name)
+          postData('order', { address, mobile, cart, total }, auth.token)
+            .then(res => {
+              if (res.error) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: { message: res.error } } });
+
+              dispatch({ type: ACTIONS.ADD_CART, payload: [] });
+              return dispatch({ type: ACTIONS.NOTIFY, payload: { success: { message: res.message } } })
+            });
+
         });
       }
     }).render(refPaypalBtn.current)
