@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: action/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup NodeJS # for setup
-        uses: action/setup-node@v4 # For action we have to use uses
+        uses: actions/setup-node@v4 # For action we have to use uses
         with:
           node-version: 18.x # parameters with node version
 
