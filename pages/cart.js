@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { getData } from '../utils/fetchData';
 import { ACTIONS } from '../store/Actions';
 import useInput from '../hooks/useInput';
-import PaypalBtn from './paypalBtn';
+// import PaypalBtn from './paypalBtn';
 
 export default function cart() {
 
@@ -88,7 +88,7 @@ export default function cart() {
         </form>
 
         <h3>Total: <span className='text-info'>${total}</span></h3>
-        {
+        {/* {
           payment
             ?
             <PaypalBtn
@@ -103,7 +103,7 @@ export default function cart() {
               onClick={handlePaypal}>
               Proceed with payment
             </Link>
-        }
+        } */}
       </div>
     </div>
   )
