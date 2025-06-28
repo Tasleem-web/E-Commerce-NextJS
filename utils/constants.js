@@ -8,6 +8,18 @@ export const WARNING = 'warning';
 export const INFO = 'info';
 export const STATUS = 'status';
 
+export const ImageExtensions = {
+  JPEG: ['.jpg', '.jpeg'],
+  PNG: ['.png'],
+  GIF: ['.gif'],
+  SVG: ['.svg'],
+  WEBP: ['.webp'],
+  APNG: ['.apng'], // Animated PNG
+  AVIF: ['.avif'], // AV1 Image File Format
+  BMP: ['.bmp'],
+  TIFF: ['.tif', '.tiff'],
+};
+
 
 export const ENUMS = {
   1: MESSAGE,

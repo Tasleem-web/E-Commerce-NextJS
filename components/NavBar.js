@@ -56,7 +56,7 @@ export default function NavBar() {
                     <span className="ml-2">{auth.user.username}</span>
                   </a>
                   <div className="dropdown-menu dropdown-menu-right">
-                    <a className="dropdown-item" href="#">Profile</a>
+                    <Link className="dropdown-item" href="/profile">Profile</Link>
                     <button className="dropdown-item" onClick={handleLogout}>Logout</button>
                   </div>
                 </li>

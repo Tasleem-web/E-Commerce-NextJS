@@ -8,7 +8,7 @@ const fieldsValidation = (obj) => {
     if (!email || !password) {
       return { status: false, message: "Please fill in all fields." };
     }
-  } else if (obj.checkType === 'register') {
+  } else if (obj.checkType === 'register' || obj.checkType === 'profile') {
     if (!username || !email || !password || !cf_password) {
       return { status: false, message: "Please fill in all fields." };
     }
