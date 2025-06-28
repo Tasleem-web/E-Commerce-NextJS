@@ -13,7 +13,8 @@ jobs:
 
       - name: Setup NodeJS # for setup
         uses: action/setup-node@v4 # For action we have to use uses
-        with: node-version: 18.x # parameters with node version
+        with:
+          node-version: 18.x # parameters with node version
 
         # install dependencies
       - name: install dependencies
